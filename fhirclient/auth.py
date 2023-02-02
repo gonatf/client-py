@@ -140,6 +140,7 @@ class FHIROAuth2Auth(FHIRAuth):
         self.access_token = None
         self.refresh_token = None
         self.expires_at = None
+        self.api_key=None
         self.jwt_token = None
         
         super(FHIROAuth2Auth, self).__init__(state=state)
@@ -171,6 +172,7 @@ class FHIROAuth2Auth(FHIRAuth):
         if headers is None:
             headers = {}
         headers['Authorization'] = "Bearer {0}".format(self.access_token)
+        headers['x-api-key']=self.api_key
         
         return headers
     
@@ -277,8 +279,17 @@ class FHIROAuth2Auth(FHIRAuth):
             auth = (self.app_id, self.app_secret)
         ret_params = server.post_as_form(self._token_uri, params, auth).json()
         
-        self.access_token = ret_params.get('access_token')
+        logger.debug("_request_access_token ret_params: %s"%ret_params)
+
+        # fix if using web based auth.  
+        if "grant_type" in params and params["grant_type"]=="client_credentials":
+            token_to_use='access_token'
+        else:
+            token_to_use='id_token'
+
+        self.access_token = ret_params.get(token_to_use)
         if self.access_token is None:
+            logger.debug(f"No access token {ret_params}")
             raise Exception("No access token received")
         del ret_params['access_token']
         
@@ -374,6 +385,8 @@ class FHIROAuth2Auth(FHIRAuth):
             s['access_token'] = self.access_token
         if self.refresh_token is not None:
             s['refresh_token'] = self.refresh_token
+        if self.api_key is not None:
+            s['api_key'] = self.api_key
         
         return s
     
@@ -391,6 +404,7 @@ class FHIROAuth2Auth(FHIRAuth):
         
         self.access_token = state.get('access_token') or self.access_token
         self.refresh_token = state.get('refresh_token') or self.refresh_token
+        self.api_key = state.get('api_key') or self.api_key
         self.jwt_token = state.get('jwt_token') or self.jwt_token
 
     # MARK: Utilities    

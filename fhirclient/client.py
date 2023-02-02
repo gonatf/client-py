@@ -7,7 +7,8 @@ __author__ = 'SMART Platforms Team'
 __license__ = 'APACHE2'
 __copyright__ = "Copyright 2017 Boston Children's Hospital"
 
-scope_default = 'user/*.* patient/*.read openid profile'
+# scope_default = 'user/*.* patient/*.read openid profile'
+scope_default=""
 scope_haslaunch = 'launch'
 scope_patientlaunch = 'launch/patient'
 
@@ -27,11 +28,13 @@ class FHIRClient(object):
         - `patient_id`: The patient id against which to operate, if already known
         - `scope`: Space-separated list of scopes to request, if other than default
         - `launch_token`: The launch token
+        - `api_key`: API key used by API
     """
     
     def __init__(self, settings=None, state=None, save_func=lambda x:x):
         self.app_id = None
         self.app_secret = None
+        self.api_key=None
         """ The app-id for the app this client is used in. """
         
         self.server = None
@@ -72,6 +75,7 @@ class FHIRClient(object):
             if not 'api_base' in settings:
                 raise Exception("Must provide 'api_base' in settings dictionary")
             
+            self.api_key=settings.get('api_key')
             self.app_id = settings['app_id']
             self.app_secret = settings.get('app_secret')
             self.redirect = settings.get('redirect_uri')
@@ -215,6 +219,7 @@ class FHIRClient(object):
     def state(self):
         return {
             'app_id': self.app_id,
+            'api_key': self.api_key,
             'app_secret': self.app_secret,
             'scope': self.scope,
             'redirect': self.redirect,
@@ -227,6 +232,7 @@ class FHIRClient(object):
     
     def from_state(self, state):
         assert state
+        self.api_key=state.get('api_key') or self.api_key
         self.app_id = state.get('app_id') or self.app_id
         self.app_secret = state.get('app_secret') or self.app_secret
         self.scope = state.get('scope') or self.scope
