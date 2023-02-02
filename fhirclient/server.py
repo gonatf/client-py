@@ -4,10 +4,7 @@ import json
 import requests
 import urllib
 import logging
-try:                                # Python 2.x
-    import urlparse
-except ImportError as e:            # Python 3
-    import urllib.parse as urlparse
+import urllib.parse as urlparse
 
 from auth import FHIRAuth
 
@@ -96,6 +93,7 @@ class FHIRServer(object):
                 'app_secret': self.client.app_secret if self.client is not None else None,
                 'redirect_uri': self.client.redirect if self.client is not None else None,
                 'jwt_token': self.client.jwt_token if self.client is not None else None,
+                'api_key':self.client.api_key if self.client is not None else None
             }
             self.auth = FHIRAuth.from_capability_security(security, settings)
             self.should_save_state()
@@ -282,7 +280,8 @@ class FHIRServer(object):
             headers = self.auth.signed_headers(headers)
         
         # perform the request but intercept 401 responses, raising our own Exception
-        res = self.session.delete(url)
+        # print(str(url))
+        res = self.session.delete(url,headers=headers)
         self.raise_for_status(res)
         return res
     
@@ -290,6 +289,19 @@ class FHIRServer(object):
         if response.status_code < 400:
             return
         
+        # print(response.status_code)
+
+        respJ=json.loads(response.text)
+        logger.debug(f"[[\n{json.dumps(respJ,indent=2)}\n]]")
+
+        if "issue" in respJ:
+            for i in respJ["issue"]:
+
+                if i["severity"]=="error":
+                    logger.debug(f'\t{i["diagnostics"]}')
+                    if "location" in i:
+                        logger.debug(f'\t{i["location"][0]}')
+
         if 401 == response.status_code:
             raise FHIRUnauthorizedException(response)
         elif 403 == response.status_code:
