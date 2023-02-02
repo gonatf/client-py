@@ -97,6 +97,7 @@ class FHIRServer:
                 if self.client is not None
                 else None,
                 "jwt_token": self.client.jwt_token if self.client is not None else None,
+                "api_key": self.client.api_key if self.client is not None else None,
             }
             self.auth = FHIRAuth.from_capability_security(security, settings)
             self.should_save_state()
@@ -286,6 +287,16 @@ class FHIRServer:
     def raise_for_status(self, response):
         if response.status_code < 400:
             return
+
+        resp_json = json.loads(response.text)
+        logger.debug(f"[[\n{json.dumps(resp_json, indent=2)}\n]]")
+
+        if "issue" in resp_json:
+            for i in resp_json["issue"]:
+                if i["severity"] == "error":
+                    logger.debug(f'\t{i["diagnostics"]}')
+                    if "location" in i:
+                        logger.debug(f'\t{i["location"][0]}')
 
         if 401 == response.status_code:
             raise FHIRUnauthorizedException(response)
