@@ -68,7 +68,7 @@ class FHIRServer(object):
         self.get_capability()
         return self._capability
     
-    def get_capability(self, force=False):
+    def get_capability(self, force=False, auth=None):
         """ Returns the server's CapabilityStatement, retrieving it if needed
         or forced.
         """
@@ -90,7 +90,9 @@ class FHIRServer(object):
                 'app_secret': self.client.app_secret if self.client is not None else None,
                 'redirect_uri': self.client.redirect if self.client is not None else None,
                 'jwt_token': self.client.jwt_token if self.client is not None else None,
-                'api_key':self.client.api_key if self.client is not None else None
+                'api_key':self.client.api_key if self.client is not None else None,
+                'token_uri': self.client.token_uri if self.client is not None and hasattr(self.client,"token_uri") else None,
+                'token': self.client.token if self.client is not None and hasattr(self.client,"token") else None
             }
             self.auth = FHIRAuth.from_capability_security(security, settings)
             self.should_save_state()
@@ -191,7 +193,11 @@ class FHIRServer(object):
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
         
+        if "Authorization" not in headers and hasattr(self.client,"token") and self.client.token:
+            headers["Authorization"] = f'Basic {self.client.token}'
+
         # perform the request but intercept 401 responses, raising our own Exception
+        logger.debug(f"url={url} headers={headers}")
         res = self.session.get(url, headers=headers)
         self.raise_for_status(res)
         return res
@@ -215,6 +221,9 @@ class FHIRServer(object):
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
         
+        if "Authorization" not in headers and hasattr(self.client,"token") and self.client.token:
+            headers["Authorization"] = f'Basic {self.client.token}'
+
         # perform the request but intercept 401 responses, raising our own Exception
         res = self.session.put(url, headers=headers, data=json.dumps(resource_json))
         self.raise_for_status(res)
@@ -238,6 +247,9 @@ class FHIRServer(object):
         }
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
+
+        if "Authorization" not in headers and hasattr(self.client,"token") and self.client.token:
+            headers["Authorization"] = f'Basic {self.client.token}'
         
         # perform the request but intercept 401 responses, raising our own Exception
         res = self.session.post(url, headers=headers, data=json.dumps(resource_json))
@@ -256,7 +268,9 @@ class FHIRServer(object):
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
             'Accept': 'application/json',
         }
+        # logger.debug(f'url={url}, data={formdata}, auth={auth}')
         res = self.session.post(url, data=formdata, auth=auth)
+        # logger.debug(f'{res}')
         self.raise_for_status(res)
         return res
     
@@ -276,6 +290,9 @@ class FHIRServer(object):
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
         
+        if "Authorization" not in headers and hasattr(self.client,"token") and self.client.token:
+            headers["Authorization"] = f'Basic {self.client.token}'
+
         # perform the request but intercept 401 responses, raising our own Exception
         # print(str(url))
         res = self.session.delete(url,headers=headers)
@@ -289,15 +306,16 @@ class FHIRServer(object):
         # print(response.status_code)
 
         respJ=json.loads(response.text)
-        logger.debug(f"[[\n{json.dumps(respJ,indent=2)}\n]]")
+        # logger.debug(f"[[\n{json.dumps(respJ,indent=2)}\n]]")
 
         if "issue" in respJ:
             for i in respJ["issue"]:
 
                 if i["severity"]=="error":
-                    logger.debug(f'\t{i["diagnostics"]}')
-                    if "location" in i:
-                        logger.debug(f'\t{i["location"][0]}')
+                    logger.debug(f'\n{json.dumps(i,indent=2)}')
+                    # logger.debug(f'\t{i["diagnostics"]}')
+                    # if "location" in i:
+                    #     logger.debug(f'\t{i["location"][0]}')
 
         if 401 == response.status_code:
             raise FHIRUnauthorizedException(response)
