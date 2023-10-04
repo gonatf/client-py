@@ -66,8 +66,12 @@ class FHIRSearch(object):
                 else:
                     parts.append(param.as_parameter())
 
-        for reference_model, reference_field, reverse in self.includes:
-            key = '_revinclude' if reverse else '_include'
+        for reference_model, reference_field, reverse, iterate in self.includes:
+            if iterate:
+                key = '_revinclude:iterate' if reverse else '_include:iterate'
+            else:
+                key = '_revinclude' if reverse else '_include'
+
             parameter = '{}={}:{}'.format(
                 key, reference_model.resource_type, reference_field
             )
@@ -75,7 +79,7 @@ class FHIRSearch(object):
 
         return '{}?{}'.format(self.resource_type.resource_type, '&'.join(parts))
 
-    def include(self, reference_field, reference_model=None, reverse=False):
+    def include(self, reference_field, reference_model=None, reverse=False, iterate=False):
         """ Add a resource to be included in the search results. Includes will
         fetch additional resources referred to by the search results, or
         additional resources which themselves refer to the search results
@@ -104,18 +108,21 @@ class FHIRSearch(object):
             in reference_model().elementProperties()
         }
 
-        if model_fields.get(reference_field) is not fhirreference.FHIRReference:
-            logging.warning(
-                '%s does not have a reference type element named %s',
-                reference_model.resource_type, reference_field
-            )
-            return self
+        # logging.info(real_name.get(reference_field))
 
-        if reference_model is not self.resource_type and not reverse:
+        # if model_fields.get(reference_field) is not fhirreference.FHIRReference:
+        #     logging.warning(
+        #         '%s does not have a reference type element named %s',
+        #         reference_model.resource_type, reference_field
+        #     )
+        #     return self
+
+        if reference_model is not self.resource_type and not reverse and not iterate:
             logging.warning('Only reverse includes can have a different reference model')
             reverse = True
 
-        self.includes.append((reference_model, reference_field, reverse))
+        self.includes.append((reference_model, reference_field, reverse, iterate))
+
         return self
 
     def _read_bundle(self, server) -> 'Bundle':

@@ -50,7 +50,8 @@ class FHIRAuth:
                     if e.extension is not None:
                         for ee in e.extension:
                             if "token" == ee.url:
-                                state["token_uri"] = ee.valueUri
+                                if "token_uri" not in state:
+                                    state["token_uri"] = ee.valueUri
                             elif "authorize" == ee.url:
                                 state["authorize_uri"] = ee.valueUri
                             elif "register" == ee.url:
@@ -159,9 +160,10 @@ class FHIROAuth2Auth(FHIRAuth):
         self.access_token = None
         self.refresh_token = None
         self.expires_at = None
-        self.api_key=None
+        self.api_key = None
         self.jwt_token = None
         self.code_verifier = None
+        self.token = None
 
         super(FHIROAuth2Auth, self).__init__(state=state)
 

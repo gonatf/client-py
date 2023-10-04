@@ -1,4 +1,5 @@
 import logging
+from base64 import b64encode
 from .server import FHIRServer, FHIRUnauthorizedException, FHIRNotFoundException
 
 __version__ = "4.4.0"  # Update docs/Doxyfile too when you bump this
@@ -58,6 +59,11 @@ class FHIRClient:
         with a backend system through a client_assertion parameter
         """
 
+        self.token_uri = None
+        self.username = None
+        self.password = None
+        self.token = None
+
         if save_func is None:
             raise Exception(
                 "Must supply a save_func when initializing the SMART client"
@@ -70,13 +76,13 @@ class FHIRClient:
 
         # init from settings dict
         elif settings is not None:
-            if "app_id" not in settings:
+            if "app_id" not in settings and "username" not in settings:  # not basic auth
                 raise Exception("Must provide 'app_id' in settings dictionary")
             if "api_base" not in settings:
                 raise Exception("Must provide 'api_base' in settings dictionary")
 
             self.api_key = settings.get("api_key")
-            self.app_id = settings["app_id"]
+            self.app_id = settings.get("app_id")
             self.app_secret = settings.get("app_secret")
             self.redirect = settings.get("redirect_uri")
             self.patient_id = settings.get("patient_id")
@@ -84,6 +90,10 @@ class FHIRClient:
             self.launch_token = settings.get("launch_token")
             self.jwt_token = settings.get("jwt_token", None)
             self.server = FHIRServer(self, base_uri=settings["api_base"])
+            self.token_uri = settings.get("token_uri", None)
+            self.username = settings.get("username")
+            self.password = settings.get("password")
+            self.token = settings.get("token")
         else:
             raise Exception(
                 "Must either supply settings or a state upon client initialization"
@@ -145,6 +155,9 @@ class FHIRClient:
         ctx = self.server.authorize() if self.server is not None else None
         self._handle_launch_context(ctx)
 
+    def create_basic_auth(self):
+        self.token = b64encode(f"{self.username}:{self.password}".encode('utf-8')).decode("ascii")
+    
     def reauthorize(self):
         """Try to reauthorize with the server.
 
@@ -227,6 +240,7 @@ class FHIRClient:
             "launch_token": self.launch_token,
             "launch_context": self.launch_context,
             "jwt_token": self.jwt_token,
+            "token": self.token,
         }
 
     def from_state(self, state):
@@ -241,6 +255,7 @@ class FHIRClient:
         self.launch_context = state.get("launch_context") or self.launch_context
         self.server = FHIRServer(self, state=state.get("server"))
         self.jwt_token = state.get("jwt_token") or self.jwt_token
+        self.token = state.get("token") or self.token
 
     def save_state(self):
         self._save_func(self.state)

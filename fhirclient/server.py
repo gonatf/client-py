@@ -68,7 +68,8 @@ class FHIRServer:
         self.get_capability()
         return self._capability
 
-    def get_capability(self, force=False):
+
+    def get_capability(self, force=False, auth=None):
         """Returns the server's CapabilityStatement, retrieving it if needed
         or forced.
         """
@@ -76,7 +77,14 @@ class FHIRServer:
             logger.info(f"Fetching CapabilityStatement from {self.base_uri}")
             from .models import capabilitystatement
 
-            conf = capabilitystatement.CapabilityStatement.read_from("metadata", self)
+            if auth:
+                path = f"metadata?Authorization=Bearer {auth}"
+            elif hasattr(self.client, "token") and self.client.token:
+                path = f"metadata?Authorization=Basic {self.client.token}"
+            else:
+                path = "metadata"
+
+            conf = capabilitystatement.CapabilityStatement.read_from(path, self)
             self._capability = conf
 
             security = None
@@ -98,6 +106,8 @@ class FHIRServer:
                 else None,
                 "jwt_token": self.client.jwt_token if self.client is not None else None,
                 "api_key": self.client.api_key if self.client is not None else None,
+                "token_uri": self.client.token_uri if self.client is not None and hasattr(self.client, "token_uri") else None,
+                "token": self.client.token if self.client is not None and hasattr(self.client, "token") else None,
             }
             self.auth = FHIRAuth.from_capability_security(security, settings)
             self.should_save_state()
@@ -197,8 +207,11 @@ class FHIRServer:
         headers = header_defaults
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
+        if "Authorization" not in headers and hasattr(self.client, "token") and self.client.token:
+            headers["Authorization"] = f"Basic {self.client.token}"
 
         # perform the request but intercept 401 responses, raising our own Exception
+        logger.debug(f"url={url} headers={headers}")
         res = self.session.get(url, headers=headers)
         self.raise_for_status(res)
         return res
@@ -221,6 +234,8 @@ class FHIRServer:
         }
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
+        if "Authorization" not in headers and hasattr(self.client, "token") and self.client.token:
+            headers["Authorization"] = f"Basic {self.client.token}"
 
         # perform the request but intercept 401 responses, raising our own Exception
         res = self.session.put(url, headers=headers, data=json.dumps(resource_json))
@@ -245,6 +260,8 @@ class FHIRServer:
         }
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
+        if "Authorization" not in headers and hasattr(self.client, "token") and self.client.token:
+            headers["Authorization"] = f"Basic {self.client.token}"
 
         # perform the request but intercept 401 responses, raising our own Exception
         res = self.session.post(url, headers=headers, data=json.dumps(resource_json))
@@ -259,7 +276,11 @@ class FHIRServer:
         :throws: Exception on HTTP status >= 400
         :returns: The response object
         """
-        res = self.session.post(url, data=formdata, auth=auth)
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+            "Accept": "application/json",
+        }
+        res = self.session.post(url, headers=headers, data=formdata, auth=auth)
         self.raise_for_status(res)
         return res
 
@@ -278,6 +299,8 @@ class FHIRServer:
         }
         if not nosign and self.auth is not None and self.auth.can_sign_headers():
             headers = self.auth.signed_headers(headers)
+        if "Authorization" not in headers and hasattr(self.client, "token") and self.client.token:
+            headers["Authorization"] = f"Basic {self.client.token}"
 
         # perform the request but intercept 401 responses, raising our own Exception
         res = self.session.delete(url, headers=headers)
@@ -294,9 +317,7 @@ class FHIRServer:
         if "issue" in resp_json:
             for i in resp_json["issue"]:
                 if i["severity"] == "error":
-                    logger.debug(f'\t{i["diagnostics"]}')
-                    if "location" in i:
-                        logger.debug(f'\t{i["location"][0]}')
+                    logger.debug(f'\n{json.dumps(i, indent=2)}')
 
         if 401 == response.status_code:
             raise FHIRUnauthorizedException(response)
