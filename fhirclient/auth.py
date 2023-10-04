@@ -47,7 +47,8 @@ class FHIRAuth(object):
                     if e.extension is not None:
                         for ee in e.extension:
                             if 'token' == ee.url:
-                                state['token_uri'] = ee.valueUri
+                                if "token_uri" not in state:
+                                    state['token_uri'] = ee.valueUri
                             elif 'authorize' == ee.url:
                                 state['authorize_uri'] = ee.valueUri
                                 auth_type = 'oauth2'
@@ -147,6 +148,7 @@ class FHIROAuth2Auth(FHIRAuth):
         self.expires_at = None
         self.api_key=None
         self.jwt_token = None
+        self.token = None
         
         super(FHIROAuth2Auth, self).__init__(state=state)
     
@@ -284,7 +286,7 @@ class FHIROAuth2Auth(FHIRAuth):
             auth = (self.app_id, self.app_secret)
         ret_params = server.post_as_form(self._token_uri, params, auth).json()
         
-        logger.debug("_request_access_token ret_params: %s"%ret_params)
+        # logger.debug("_request_access_token ret_params: %s"%ret_params)
 
         # fix if using web based auth.  
         if "grant_type" in params and params["grant_type"]=="client_credentials":
