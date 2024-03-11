@@ -327,9 +327,9 @@ class FHIRServer(object):
 
                 if i["severity"]=="error":
                     logger.debug(f'\n{json.dumps(i,indent=2)}')
-                    # logger.debug(f'\t{i["diagnostics"]}')
-                    # if "location" in i:
-                    #     logger.debug(f'\t{i["location"][0]}')
+                    logger.debug(f'\t{i["diagnostics"]}')
+                    if "location" in i:
+                        logger.debug(f'\t{i["location"][0]}')
 
         if 401 == response.status_code:
             raise FHIRUnauthorizedException(response)
