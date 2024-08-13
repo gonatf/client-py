@@ -75,7 +75,19 @@ class FHIRServer(object):
         if self._capability is None or force:
             logger.info('Fetching CapabilityStatement from {0}'.format(self.base_uri))
             from .models import capabilitystatement
-            conf = capabilitystatement.CapabilityStatement.read_from('metadata', self)
+
+            if auth:
+                path=f"metadata?Authorization=Bearer {auth}"
+
+            elif hasattr(self.client,'token') and self.client.token:
+                path=f"metadata?Authorization=Basic {self.client.token}"
+
+            else:
+                path="metadata"
+
+            logger.info(path)
+
+            conf = capabilitystatement.CapabilityStatement.read_from(path, self)
             self._capability = conf
             
             security = None
