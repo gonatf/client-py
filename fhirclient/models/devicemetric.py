@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/DeviceMetric) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/DeviceMetric).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -107,7 +104,7 @@ class DeviceMetricCalibration(backboneelement.BackboneElement):
         
         self.time = None
         """ Describes the time last calibration has been performed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRInstant` (represented as `str` in JSON). """
         
         self.type = None
         """ unspecified | offset | gain | two-point.
@@ -119,30 +116,14 @@ class DeviceMetricCalibration(backboneelement.BackboneElement):
         js = super(DeviceMetricCalibration, self).elementProperties()
         js.extend([
             ("state", "state", str, False, None, False),
-            ("time", "time", fhirdate.FHIRDate, False, None, False),
+            ("time", "time", fhirinstant.FHIRInstant, False, None, False),
             ("type", "type", str, False, None, False),
         ])
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
+from . import codeableconcept
+from . import fhirinstant
+from . import fhirreference
+from . import identifier
+from . import timing

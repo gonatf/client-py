@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Condition) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Condition).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -30,7 +27,7 @@ class Condition(domainresource.DomainResource):
         
         self.abatementDateTime = None
         """ When in resolution/remission.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.abatementPeriod = None
         """ When in resolution/remission.
@@ -86,7 +83,7 @@ class Condition(domainresource.DomainResource):
         
         self.onsetDateTime = None
         """ Estimated or actual date,  date-time, or age.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.onsetPeriod = None
         """ Estimated or actual date,  date-time, or age.
@@ -102,7 +99,7 @@ class Condition(domainresource.DomainResource):
         
         self.recordedDate = None
         """ Date record was first recorded.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.recorder = None
         """ Who recorded the condition.
@@ -131,7 +128,7 @@ class Condition(domainresource.DomainResource):
         js = super(Condition, self).elementProperties()
         js.extend([
             ("abatementAge", "abatementAge", age.Age, False, "abatement", False),
-            ("abatementDateTime", "abatementDateTime", fhirdate.FHIRDate, False, "abatement", False),
+            ("abatementDateTime", "abatementDateTime", fhirdatetime.FHIRDateTime, False, "abatement", False),
             ("abatementPeriod", "abatementPeriod", period.Period, False, "abatement", False),
             ("abatementRange", "abatementRange", range.Range, False, "abatement", False),
             ("abatementString", "abatementString", str, False, "abatement", False),
@@ -145,11 +142,11 @@ class Condition(domainresource.DomainResource):
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("note", "note", annotation.Annotation, True, None, False),
             ("onsetAge", "onsetAge", age.Age, False, "onset", False),
-            ("onsetDateTime", "onsetDateTime", fhirdate.FHIRDate, False, "onset", False),
+            ("onsetDateTime", "onsetDateTime", fhirdatetime.FHIRDateTime, False, "onset", False),
             ("onsetPeriod", "onsetPeriod", period.Period, False, "onset", False),
             ("onsetRange", "onsetRange", range.Range, False, "onset", False),
             ("onsetString", "onsetString", str, False, "onset", False),
-            ("recordedDate", "recordedDate", fhirdate.FHIRDate, False, None, False),
+            ("recordedDate", "recordedDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("recorder", "recorder", fhirreference.FHIRReference, False, None, False),
             ("severity", "severity", codeableconcept.CodeableConcept, False, None, False),
             ("stage", "stage", ConditionStage, True, None, False),
@@ -239,36 +236,11 @@ class ConditionStage(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import age
-except ImportError:
-    age = sys.modules[__package__ + '.age']
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import range
-except ImportError:
-    range = sys.modules[__package__ + '.range']
+from . import age
+from . import annotation
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import range

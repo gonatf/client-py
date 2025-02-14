@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import uuid
 import logging
 from datetime import datetime, timedelta
-try:                                # Python 2.x
-    import urlparse
-    from urllib import urlencode
-except Exception as e:              # Python 3
-    import urllib.parse as urlparse
-    from urllib.parse import urlencode
+import urllib.parse as urlparse
+from urllib.parse import urlencode
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +45,6 @@ class FHIRAuth(object):
                                     state['token_uri'] = ee.valueUri
                             elif 'authorize' == ee.url:
                                 state['authorize_uri'] = ee.valueUri
-                                auth_type = 'oauth2'
                             elif 'register' == ee.url:
                                 state['registration_uri'] = ee.valueUri
                         break
@@ -63,9 +56,11 @@ class FHIRAuth(object):
                     state['registration_uri'] = e.valueUri
                 elif "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris#authorize" == e.url:
                     state['authorize_uri'] = e.valueUri
-                    auth_type = 'oauth2'
                 elif "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris#token" == e.url:
                     state['token_uri'] = e.valueUri
+
+            if 'authorize_uri' in state or ('token_uri' in state and 'jwt_token' in state):
+                auth_type = 'oauth2'
         
         return cls.create(auth_type, state=state)
     
@@ -210,7 +205,7 @@ class FHIROAuth2Auth(FHIRAuth):
         if server is None:
             raise Exception("Cannot create an authorize-uri without server instance")
         if self.auth_state is None:
-            self.auth_state = str(uuid.uuid4())[:8]
+            self.auth_state = str(uuid.uuid4())
             server.should_save_state()
         
         params = {

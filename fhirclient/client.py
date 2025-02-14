@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
 import logging
-
-from server import FHIRServer, FHIRUnauthorizedException, FHIRNotFoundException
-
 from base64 import b64encode
 
-__version__ = '4.1.0'
+from .server import FHIRServer, FHIRUnauthorizedException, FHIRNotFoundException
+
+__version__ = '4.2.0'
 __author__ = 'SMART Platforms Team'
 __license__ = 'APACHE2'
 __copyright__ = "Copyright 2017 Boston Children's Hospital"

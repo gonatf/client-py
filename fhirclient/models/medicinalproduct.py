@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/MedicinalProduct) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/MedicinalProduct).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -167,7 +164,7 @@ class MedicinalProductManufacturingBusinessOperation(backboneelement.BackboneEle
         
         self.effectiveDate = None
         """ Regulatory authorization date.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.manufacturer = None
         """ The manufacturer or establishment associated with the process.
@@ -188,7 +185,7 @@ class MedicinalProductManufacturingBusinessOperation(backboneelement.BackboneEle
         js.extend([
             ("authorisationReferenceNumber", "authorisationReferenceNumber", identifier.Identifier, False, None, False),
             ("confidentialityIndicator", "confidentialityIndicator", codeableconcept.CodeableConcept, False, None, False),
-            ("effectiveDate", "effectiveDate", fhirdate.FHIRDate, False, None, False),
+            ("effectiveDate", "effectiveDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("manufacturer", "manufacturer", fhirreference.FHIRReference, True, None, False),
             ("operationType", "operationType", codeableconcept.CodeableConcept, False, None, False),
             ("regulator", "regulator", fhirreference.FHIRReference, False, None, False),
@@ -322,7 +319,7 @@ class MedicinalProductSpecialDesignation(backboneelement.BackboneElement):
         
         self.date = None
         """ Date when the designation was granted.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.identifier = None
         """ Identifier for the designation, or procedure number.
@@ -357,7 +354,7 @@ class MedicinalProductSpecialDesignation(backboneelement.BackboneElement):
     def elementProperties(self):
         js = super(MedicinalProductSpecialDesignation, self).elementProperties()
         js.extend([
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("indicationCodeableConcept", "indicationCodeableConcept", codeableconcept.CodeableConcept, False, "indication", False),
             ("indicationReference", "indicationReference", fhirreference.FHIRReference, False, "indication", False),
@@ -369,28 +366,9 @@ class MedicinalProductSpecialDesignation(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import coding
-except ImportError:
-    coding = sys.modules[__package__ + '.coding']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import marketingstatus
-except ImportError:
-    marketingstatus = sys.modules[__package__ + '.marketingstatus']
+from . import codeableconcept
+from . import coding
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import marketingstatus

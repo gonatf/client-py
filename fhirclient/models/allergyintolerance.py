@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/AllergyIntolerance) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/AllergyIntolerance).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -54,7 +51,7 @@ class AllergyIntolerance(domainresource.DomainResource):
         
         self.lastOccurrence = None
         """ Date(/time) of last known occurrence of a reaction.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.note = None
         """ Additional text not captured in other fields.
@@ -66,7 +63,7 @@ class AllergyIntolerance(domainresource.DomainResource):
         
         self.onsetDateTime = None
         """ When allergy or intolerance was identified.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.onsetPeriod = None
         """ When allergy or intolerance was identified.
@@ -90,7 +87,7 @@ class AllergyIntolerance(domainresource.DomainResource):
         
         self.recordedDate = None
         """ Date first version of the resource instance was recorded.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.recorder = None
         """ Who recorded the sensitivity.
@@ -116,16 +113,16 @@ class AllergyIntolerance(domainresource.DomainResource):
             ("criticality", "criticality", str, False, None, False),
             ("encounter", "encounter", fhirreference.FHIRReference, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
-            ("lastOccurrence", "lastOccurrence", fhirdate.FHIRDate, False, None, False),
+            ("lastOccurrence", "lastOccurrence", fhirdatetime.FHIRDateTime, False, None, False),
             ("note", "note", annotation.Annotation, True, None, False),
             ("onsetAge", "onsetAge", age.Age, False, "onset", False),
-            ("onsetDateTime", "onsetDateTime", fhirdate.FHIRDate, False, "onset", False),
+            ("onsetDateTime", "onsetDateTime", fhirdatetime.FHIRDateTime, False, "onset", False),
             ("onsetPeriod", "onsetPeriod", period.Period, False, "onset", False),
             ("onsetRange", "onsetRange", range.Range, False, "onset", False),
             ("onsetString", "onsetString", str, False, "onset", False),
             ("patient", "patient", fhirreference.FHIRReference, False, None, True),
             ("reaction", "reaction", AllergyIntoleranceReaction, True, None, False),
-            ("recordedDate", "recordedDate", fhirdate.FHIRDate, False, None, False),
+            ("recordedDate", "recordedDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("recorder", "recorder", fhirreference.FHIRReference, False, None, False),
             ("type", "type", str, False, None, False),
             ("verificationStatus", "verificationStatus", codeableconcept.CodeableConcept, False, None, False),
@@ -170,7 +167,7 @@ class AllergyIntoleranceReaction(backboneelement.BackboneElement):
         
         self.onset = None
         """ Date(/time) when manifestations showed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.severity = None
         """ mild | moderate | severe (of event as a whole).
@@ -190,43 +187,18 @@ class AllergyIntoleranceReaction(backboneelement.BackboneElement):
             ("exposureRoute", "exposureRoute", codeableconcept.CodeableConcept, False, None, False),
             ("manifestation", "manifestation", codeableconcept.CodeableConcept, True, None, True),
             ("note", "note", annotation.Annotation, True, None, False),
-            ("onset", "onset", fhirdate.FHIRDate, False, None, False),
+            ("onset", "onset", fhirdatetime.FHIRDateTime, False, None, False),
             ("severity", "severity", str, False, None, False),
             ("substance", "substance", codeableconcept.CodeableConcept, False, None, False),
         ])
         return js
 
 
-import sys
-try:
-    from . import age
-except ImportError:
-    age = sys.modules[__package__ + '.age']
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import range
-except ImportError:
-    range = sys.modules[__package__ + '.range']
+from . import age
+from . import annotation
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import range

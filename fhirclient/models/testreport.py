@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/TestReport) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/TestReport).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -29,7 +26,7 @@ class TestReport(domainresource.DomainResource):
         
         self.issued = None
         """ When the TestScript was executed and this TestReport was generated.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.name = None
         """ Informal name of the executed TestScript.
@@ -82,7 +79,7 @@ class TestReport(domainresource.DomainResource):
         js = super(TestReport, self).elementProperties()
         js.extend([
             ("identifier", "identifier", identifier.Identifier, False, None, False),
-            ("issued", "issued", fhirdate.FHIRDate, False, None, False),
+            ("issued", "issued", fhirdatetime.FHIRDateTime, False, None, False),
             ("name", "name", str, False, None, False),
             ("participant", "participant", TestReportParticipant, True, None, False),
             ("result", "result", str, False, None, True),
@@ -416,16 +413,6 @@ class TestReportTestAction(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier

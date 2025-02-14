@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/HealthcareService) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/HealthcareService).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -177,11 +174,11 @@ class HealthcareServiceAvailableTime(backboneelement.BackboneElement):
         
         self.availableEndTime = None
         """ Closing time of day (ignored if allDay = true).
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRTime` (represented as `str` in JSON). """
         
         self.availableStartTime = None
         """ Opening time of day (ignored if allDay = true).
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRTime` (represented as `str` in JSON). """
         
         self.daysOfWeek = None
         """ mon | tue | wed | thu | fri | sat | sun.
@@ -193,8 +190,8 @@ class HealthcareServiceAvailableTime(backboneelement.BackboneElement):
         js = super(HealthcareServiceAvailableTime, self).elementProperties()
         js.extend([
             ("allDay", "allDay", bool, False, None, False),
-            ("availableEndTime", "availableEndTime", fhirdate.FHIRDate, False, None, False),
-            ("availableStartTime", "availableStartTime", fhirdate.FHIRDate, False, None, False),
+            ("availableEndTime", "availableEndTime", fhirtime.FHIRTime, False, None, False),
+            ("availableStartTime", "availableStartTime", fhirtime.FHIRTime, False, None, False),
             ("daysOfWeek", "daysOfWeek", str, True, None, False),
         ])
         return js
@@ -272,32 +269,10 @@ class HealthcareServiceNotAvailable(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import attachment
-except ImportError:
-    attachment = sys.modules[__package__ + '.attachment']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import contactpoint
-except ImportError:
-    contactpoint = sys.modules[__package__ + '.contactpoint']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
+from . import attachment
+from . import codeableconcept
+from . import contactpoint
+from . import fhirreference
+from . import fhirtime
+from . import identifier
+from . import period

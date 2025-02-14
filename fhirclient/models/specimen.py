@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Specimen) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Specimen).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -57,7 +54,7 @@ class Specimen(domainresource.DomainResource):
         
         self.receivedTime = None
         """ The time when specimen was received for processing.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.request = None
         """ Why the specimen was collected.
@@ -90,7 +87,7 @@ class Specimen(domainresource.DomainResource):
             ("note", "note", annotation.Annotation, True, None, False),
             ("parent", "parent", fhirreference.FHIRReference, True, None, False),
             ("processing", "processing", SpecimenProcessing, True, None, False),
-            ("receivedTime", "receivedTime", fhirdate.FHIRDate, False, None, False),
+            ("receivedTime", "receivedTime", fhirdatetime.FHIRDateTime, False, None, False),
             ("request", "request", fhirreference.FHIRReference, True, None, False),
             ("status", "status", str, False, None, False),
             ("subject", "subject", fhirreference.FHIRReference, False, None, False),
@@ -123,7 +120,7 @@ class SpecimenCollection(backboneelement.BackboneElement):
         
         self.collectedDateTime = None
         """ Collection time.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.collectedPeriod = None
         """ Collection time.
@@ -159,7 +156,7 @@ class SpecimenCollection(backboneelement.BackboneElement):
         js = super(SpecimenCollection, self).elementProperties()
         js.extend([
             ("bodySite", "bodySite", codeableconcept.CodeableConcept, False, None, False),
-            ("collectedDateTime", "collectedDateTime", fhirdate.FHIRDate, False, "collected", False),
+            ("collectedDateTime", "collectedDateTime", fhirdatetime.FHIRDateTime, False, "collected", False),
             ("collectedPeriod", "collectedPeriod", period.Period, False, "collected", False),
             ("collector", "collector", fhirreference.FHIRReference, False, None, False),
             ("duration", "duration", duration.Duration, False, None, False),
@@ -262,7 +259,7 @@ class SpecimenProcessing(backboneelement.BackboneElement):
         
         self.timeDateTime = None
         """ Date and time of specimen processing.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.timePeriod = None
         """ Date and time of specimen processing.
@@ -276,42 +273,17 @@ class SpecimenProcessing(backboneelement.BackboneElement):
             ("additive", "additive", fhirreference.FHIRReference, True, None, False),
             ("description", "description", str, False, None, False),
             ("procedure", "procedure", codeableconcept.CodeableConcept, False, None, False),
-            ("timeDateTime", "timeDateTime", fhirdate.FHIRDate, False, "time", False),
+            ("timeDateTime", "timeDateTime", fhirdatetime.FHIRDateTime, False, "time", False),
             ("timePeriod", "timePeriod", period.Period, False, "time", False),
         ])
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import quantity
-except ImportError:
-    quantity = sys.modules[__package__ + '.quantity']
+from . import annotation
+from . import codeableconcept
+from . import duration
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import quantity

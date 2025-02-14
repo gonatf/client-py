@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/AppointmentResponse) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/AppointmentResponse).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -36,15 +33,14 @@ class AppointmentResponse(domainresource.DomainResource):
         
         self.end = None
         """ Time from appointment, or requested new end time.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRInstant` (represented as `str` in JSON). """
         
         self.identifier = None
         """ External Ids for this item.
         List of `Identifier` items (represented as `dict` in JSON). """
         
         self.participantStatus = None
-        """ accepted | declined | tentative | in-process | completed | needs-
-        action | entered-in-error.
+        """ accepted | declined | tentative | needs-action.
         Type `str`. """
         
         self.participantType = None
@@ -53,7 +49,7 @@ class AppointmentResponse(domainresource.DomainResource):
         
         self.start = None
         """ Time from appointment, or requested new start time.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRInstant` (represented as `str` in JSON). """
         
         super(AppointmentResponse, self).__init__(jsondict=jsondict, strict=strict)
     
@@ -63,29 +59,16 @@ class AppointmentResponse(domainresource.DomainResource):
             ("actor", "actor", fhirreference.FHIRReference, False, None, False),
             ("appointment", "appointment", fhirreference.FHIRReference, False, None, True),
             ("comment", "comment", str, False, None, False),
-            ("end", "end", fhirdate.FHIRDate, False, None, False),
+            ("end", "end", fhirinstant.FHIRInstant, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("participantStatus", "participantStatus", str, False, None, True),
             ("participantType", "participantType", codeableconcept.CodeableConcept, True, None, False),
-            ("start", "start", fhirdate.FHIRDate, False, None, False),
+            ("start", "start", fhirinstant.FHIRInstant, False, None, False),
         ])
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
+from . import codeableconcept
+from . import fhirinstant
+from . import fhirreference
+from . import identifier

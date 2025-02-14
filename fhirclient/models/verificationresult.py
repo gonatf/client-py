@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/VerificationResult) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/VerificationResult).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -37,7 +34,7 @@ class VerificationResult(domainresource.DomainResource):
         self.lastPerformed = None
         """ The date/time validation was last completed (including failed
         validations).
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.need = None
         """ none | initial | periodic.
@@ -58,7 +55,7 @@ class VerificationResult(domainresource.DomainResource):
         
         self.statusDate = None
         """ When the validation status was updated.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.target = None
         """ A resource that was validated.
@@ -90,12 +87,12 @@ class VerificationResult(domainresource.DomainResource):
             ("attestation", "attestation", VerificationResultAttestation, False, None, False),
             ("failureAction", "failureAction", codeableconcept.CodeableConcept, False, None, False),
             ("frequency", "frequency", timing.Timing, False, None, False),
-            ("lastPerformed", "lastPerformed", fhirdate.FHIRDate, False, None, False),
+            ("lastPerformed", "lastPerformed", fhirdatetime.FHIRDateTime, False, None, False),
             ("need", "need", codeableconcept.CodeableConcept, False, None, False),
             ("nextScheduled", "nextScheduled", fhirdate.FHIRDate, False, None, False),
             ("primarySource", "primarySource", VerificationResultPrimarySource, True, None, False),
             ("status", "status", str, False, None, True),
-            ("statusDate", "statusDate", fhirdate.FHIRDate, False, None, False),
+            ("statusDate", "statusDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("target", "target", fhirreference.FHIRReference, True, None, False),
             ("targetLocation", "targetLocation", str, True, None, False),
             ("validationProcess", "validationProcess", codeableconcept.CodeableConcept, True, None, False),
@@ -208,7 +205,7 @@ class VerificationResultPrimarySource(backboneelement.BackboneElement):
         
         self.validationDate = None
         """ When the target was validated against the primary source.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.validationStatus = None
         """ successful | failed | unknown.
@@ -227,7 +224,7 @@ class VerificationResultPrimarySource(backboneelement.BackboneElement):
             ("communicationMethod", "communicationMethod", codeableconcept.CodeableConcept, True, None, False),
             ("pushTypeAvailable", "pushTypeAvailable", codeableconcept.CodeableConcept, True, None, False),
             ("type", "type", codeableconcept.CodeableConcept, True, None, False),
-            ("validationDate", "validationDate", fhirdate.FHIRDate, False, None, False),
+            ("validationDate", "validationDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("validationStatus", "validationStatus", codeableconcept.CodeableConcept, False, None, False),
             ("who", "who", fhirreference.FHIRReference, False, None, False),
         ])
@@ -272,24 +269,9 @@ class VerificationResultValidator(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import signature
-except ImportError:
-    signature = sys.modules[__package__ + '.signature']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
+from . import codeableconcept
+from . import fhirdate
+from . import fhirdatetime
+from . import fhirreference
+from . import signature
+from . import timing

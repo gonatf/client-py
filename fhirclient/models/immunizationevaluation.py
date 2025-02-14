@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/ImmunizationEvaluation) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/ImmunizationEvaluation).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -31,7 +28,7 @@ class ImmunizationEvaluation(domainresource.DomainResource):
         
         self.date = None
         """ Date evaluation was performed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.description = None
         """ Evaluation notes.
@@ -91,7 +88,7 @@ class ImmunizationEvaluation(domainresource.DomainResource):
         js = super(ImmunizationEvaluation, self).elementProperties()
         js.extend([
             ("authority", "authority", fhirreference.FHIRReference, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("description", "description", str, False, None, False),
             ("doseNumberPositiveInt", "doseNumberPositiveInt", int, False, "doseNumber", False),
             ("doseNumberString", "doseNumberString", str, False, "doseNumber", False),
@@ -109,20 +106,7 @@ class ImmunizationEvaluation(domainresource.DomainResource):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier

@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Invoice) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Invoice).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -34,7 +31,7 @@ class Invoice(domainresource.DomainResource):
         
         self.date = None
         """ Invoice date / posting date.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.identifier = None
         """ Business Identifier for item.
@@ -95,7 +92,7 @@ class Invoice(domainresource.DomainResource):
         js.extend([
             ("account", "account", fhirreference.FHIRReference, False, None, False),
             ("cancelledReason", "cancelledReason", str, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("issuer", "issuer", fhirreference.FHIRReference, False, None, False),
             ("lineItem", "lineItem", InvoiceLineItem, True, None, False),
@@ -249,28 +246,9 @@ class InvoiceParticipant(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import money
-except ImportError:
-    money = sys.modules[__package__ + '.money']
+from . import annotation
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import money

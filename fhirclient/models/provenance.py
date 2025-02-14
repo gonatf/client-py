@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Provenance) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Provenance).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -50,7 +47,7 @@ class Provenance(domainresource.DomainResource):
         
         self.occurredDateTime = None
         """ When the activity occurred.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.occurredPeriod = None
         """ When the activity occurred.
@@ -66,7 +63,7 @@ class Provenance(domainresource.DomainResource):
         
         self.recorded = None
         """ When the activity was recorded / updated.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRInstant` (represented as `str` in JSON). """
         
         self.signature = None
         """ Signature on target.
@@ -85,11 +82,11 @@ class Provenance(domainresource.DomainResource):
             ("agent", "agent", ProvenanceAgent, True, None, True),
             ("entity", "entity", ProvenanceEntity, True, None, False),
             ("location", "location", fhirreference.FHIRReference, False, None, False),
-            ("occurredDateTime", "occurredDateTime", fhirdate.FHIRDate, False, "occurred", False),
+            ("occurredDateTime", "occurredDateTime", fhirdatetime.FHIRDateTime, False, "occurred", False),
             ("occurredPeriod", "occurredPeriod", period.Period, False, "occurred", False),
             ("policy", "policy", str, True, None, False),
             ("reason", "reason", codeableconcept.CodeableConcept, True, None, False),
-            ("recorded", "recorded", fhirdate.FHIRDate, False, None, True),
+            ("recorded", "recorded", fhirinstant.FHIRInstant, False, None, True),
             ("signature", "signature", signature.Signature, True, None, False),
             ("target", "target", fhirreference.FHIRReference, True, None, True),
         ])
@@ -182,24 +179,9 @@ class ProvenanceEntity(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import signature
-except ImportError:
-    signature = sys.modules[__package__ + '.signature']
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirinstant
+from . import fhirreference
+from . import period
+from . import signature

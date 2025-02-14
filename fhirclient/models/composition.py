@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Composition) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Composition).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -54,7 +51,7 @@ class Composition(domainresource.DomainResource):
         
         self.date = None
         """ Composition editing time.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.encounter = None
         """ Context of the Composition.
@@ -102,7 +99,7 @@ class Composition(domainresource.DomainResource):
             ("category", "category", codeableconcept.CodeableConcept, True, None, False),
             ("confidentiality", "confidentiality", str, False, None, False),
             ("custodian", "custodian", fhirreference.FHIRReference, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, True),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, True),
             ("encounter", "encounter", fhirreference.FHIRReference, False, None, False),
             ("event", "event", CompositionEvent, True, None, False),
             ("identifier", "identifier", identifier.Identifier, False, None, False),
@@ -144,7 +141,7 @@ class CompositionAttester(backboneelement.BackboneElement):
         
         self.time = None
         """ When the composition was attested.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         super(CompositionAttester, self).__init__(jsondict=jsondict, strict=strict)
     
@@ -153,7 +150,7 @@ class CompositionAttester(backboneelement.BackboneElement):
         js.extend([
             ("mode", "mode", str, False, None, True),
             ("party", "party", fhirreference.FHIRReference, False, None, False),
-            ("time", "time", fhirdate.FHIRDate, False, None, False),
+            ("time", "time", fhirdatetime.FHIRDateTime, False, None, False),
         ])
         return js
 
@@ -316,28 +313,9 @@ class CompositionSection(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import narrative
-except ImportError:
-    narrative = sys.modules[__package__ + '.narrative']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import narrative
+from . import period

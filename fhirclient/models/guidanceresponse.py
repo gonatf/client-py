@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/GuidanceResponse) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/GuidanceResponse).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -59,7 +56,7 @@ class GuidanceResponse(domainresource.DomainResource):
         
         self.occurrenceDateTime = None
         """ When the guidance response was processed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.outputParameters = None
         """ The output parameters of the evaluation, if any.
@@ -107,7 +104,7 @@ class GuidanceResponse(domainresource.DomainResource):
             ("moduleCodeableConcept", "moduleCodeableConcept", codeableconcept.CodeableConcept, False, "module", True),
             ("moduleUri", "moduleUri", str, False, "module", True),
             ("note", "note", annotation.Annotation, True, None, False),
-            ("occurrenceDateTime", "occurrenceDateTime", fhirdate.FHIRDate, False, None, False),
+            ("occurrenceDateTime", "occurrenceDateTime", fhirdatetime.FHIRDateTime, False, None, False),
             ("outputParameters", "outputParameters", fhirreference.FHIRReference, False, None, False),
             ("performer", "performer", fhirreference.FHIRReference, False, None, False),
             ("reasonCode", "reasonCode", codeableconcept.CodeableConcept, True, None, False),
@@ -120,28 +117,9 @@ class GuidanceResponse(domainresource.DomainResource):
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import datarequirement
-except ImportError:
-    datarequirement = sys.modules[__package__ + '.datarequirement']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
+from . import annotation
+from . import codeableconcept
+from . import datarequirement
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier

@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/ResearchElementDefinition) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/ResearchElementDefinition).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -50,7 +47,7 @@ class ResearchElementDefinition(domainresource.DomainResource):
         
         self.date = None
         """ Date last changed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.description = None
         """ Natural language description of the research element definition.
@@ -176,7 +173,7 @@ class ResearchElementDefinition(domainresource.DomainResource):
             ("comment", "comment", str, True, None, False),
             ("contact", "contact", contactdetail.ContactDetail, True, None, False),
             ("copyright", "copyright", str, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("description", "description", str, False, None, False),
             ("editor", "editor", contactdetail.ContactDetail, True, None, False),
             ("effectivePeriod", "effectivePeriod", period.Period, False, None, False),
@@ -249,7 +246,7 @@ class ResearchElementDefinitionCharacteristic(backboneelement.BackboneElement):
         
         self.participantEffectiveDateTime = None
         """ What time period do participants cover.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.participantEffectiveDescription = None
         """ What time period do participants cover.
@@ -278,7 +275,7 @@ class ResearchElementDefinitionCharacteristic(backboneelement.BackboneElement):
         
         self.studyEffectiveDateTime = None
         """ What time period does the study cover.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.studyEffectiveDescription = None
         """ What time period does the study cover.
@@ -323,14 +320,14 @@ class ResearchElementDefinitionCharacteristic(backboneelement.BackboneElement):
             ("definitionDataRequirement", "definitionDataRequirement", datarequirement.DataRequirement, False, "definition", True),
             ("definitionExpression", "definitionExpression", expression.Expression, False, "definition", True),
             ("exclude", "exclude", bool, False, None, False),
-            ("participantEffectiveDateTime", "participantEffectiveDateTime", fhirdate.FHIRDate, False, "participantEffective", False),
+            ("participantEffectiveDateTime", "participantEffectiveDateTime", fhirdatetime.FHIRDateTime, False, "participantEffective", False),
             ("participantEffectiveDescription", "participantEffectiveDescription", str, False, None, False),
             ("participantEffectiveDuration", "participantEffectiveDuration", duration.Duration, False, "participantEffective", False),
             ("participantEffectiveGroupMeasure", "participantEffectiveGroupMeasure", str, False, None, False),
             ("participantEffectivePeriod", "participantEffectivePeriod", period.Period, False, "participantEffective", False),
             ("participantEffectiveTimeFromStart", "participantEffectiveTimeFromStart", duration.Duration, False, None, False),
             ("participantEffectiveTiming", "participantEffectiveTiming", timing.Timing, False, "participantEffective", False),
-            ("studyEffectiveDateTime", "studyEffectiveDateTime", fhirdate.FHIRDate, False, "studyEffective", False),
+            ("studyEffectiveDateTime", "studyEffectiveDateTime", fhirdatetime.FHIRDateTime, False, "studyEffective", False),
             ("studyEffectiveDescription", "studyEffectiveDescription", str, False, None, False),
             ("studyEffectiveDuration", "studyEffectiveDuration", duration.Duration, False, "studyEffective", False),
             ("studyEffectiveGroupMeasure", "studyEffectiveGroupMeasure", str, False, None, False),
@@ -343,52 +340,16 @@ class ResearchElementDefinitionCharacteristic(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import contactdetail
-except ImportError:
-    contactdetail = sys.modules[__package__ + '.contactdetail']
-try:
-    from . import datarequirement
-except ImportError:
-    datarequirement = sys.modules[__package__ + '.datarequirement']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import expression
-except ImportError:
-    expression = sys.modules[__package__ + '.expression']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import relatedartifact
-except ImportError:
-    relatedartifact = sys.modules[__package__ + '.relatedartifact']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
-try:
-    from . import usagecontext
-except ImportError:
-    usagecontext = sys.modules[__package__ + '.usagecontext']
+from . import codeableconcept
+from . import contactdetail
+from . import datarequirement
+from . import duration
+from . import expression
+from . import fhirdate
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import relatedartifact
+from . import timing
+from . import usagecontext

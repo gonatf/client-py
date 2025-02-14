@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Claim) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Claim).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -39,7 +36,7 @@ class Claim(domainresource.DomainResource):
         
         self.created = None
         """ Resource creation date.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.diagnosis = None
         """ Pertinent diagnosis information.
@@ -141,7 +138,7 @@ class Claim(domainresource.DomainResource):
             ("accident", "accident", ClaimAccident, False, None, False),
             ("billablePeriod", "billablePeriod", period.Period, False, None, False),
             ("careTeam", "careTeam", ClaimCareTeam, True, None, False),
-            ("created", "created", fhirdate.FHIRDate, False, None, True),
+            ("created", "created", fhirdatetime.FHIRDateTime, False, None, True),
             ("diagnosis", "diagnosis", ClaimDiagnosis, True, None, False),
             ("enterer", "enterer", fhirreference.FHIRReference, False, None, False),
             ("facility", "facility", fhirreference.FHIRReference, False, None, False),
@@ -751,7 +748,7 @@ class ClaimProcedure(backboneelement.BackboneElement):
         
         self.date = None
         """ When the procedure was performed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.procedureCodeableConcept = None
         """ Specific clinical procedure.
@@ -778,7 +775,7 @@ class ClaimProcedure(backboneelement.BackboneElement):
     def elementProperties(self):
         js = super(ClaimProcedure, self).elementProperties()
         js.extend([
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("procedureCodeableConcept", "procedureCodeableConcept", codeableconcept.CodeableConcept, False, "procedure", True),
             ("procedureReference", "procedureReference", fhirreference.FHIRReference, False, "procedure", True),
             ("sequence", "sequence", int, False, None, True),
@@ -910,40 +907,13 @@ class ClaimSupportingInfo(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import address
-except ImportError:
-    address = sys.modules[__package__ + '.address']
-try:
-    from . import attachment
-except ImportError:
-    attachment = sys.modules[__package__ + '.attachment']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import money
-except ImportError:
-    money = sys.modules[__package__ + '.money']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import quantity
-except ImportError:
-    quantity = sys.modules[__package__ + '.quantity']
+from . import address
+from . import attachment
+from . import codeableconcept
+from . import fhirdate
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import money
+from . import period
+from . import quantity

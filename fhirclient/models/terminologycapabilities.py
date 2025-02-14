@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/TerminologyCapabilities) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/TerminologyCapabilities).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -49,7 +46,7 @@ class TerminologyCapabilities(domainresource.DomainResource):
         
         self.date = None
         """ Date last changed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.description = None
         """ Natural language description of the terminology capabilities.
@@ -137,7 +134,7 @@ class TerminologyCapabilities(domainresource.DomainResource):
             ("codeSystem", "codeSystem", TerminologyCapabilitiesCodeSystem, True, None, False),
             ("contact", "contact", contactdetail.ContactDetail, True, None, False),
             ("copyright", "copyright", str, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, True),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, True),
             ("description", "description", str, False, None, False),
             ("expansion", "expansion", TerminologyCapabilitiesExpansion, False, None, False),
             ("experimental", "experimental", bool, False, None, False),
@@ -537,20 +534,7 @@ class TerminologyCapabilitiesValidateCode(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import contactdetail
-except ImportError:
-    contactdetail = sys.modules[__package__ + '.contactdetail']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import usagecontext
-except ImportError:
-    usagecontext = sys.modules[__package__ + '.usagecontext']
+from . import codeableconcept
+from . import contactdetail
+from . import fhirdatetime
+from . import usagecontext

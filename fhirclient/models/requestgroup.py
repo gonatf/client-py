@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/RequestGroup) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/RequestGroup).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -34,7 +31,7 @@ class RequestGroup(domainresource.DomainResource):
         
         self.authoredOn = None
         """ When the request group was authored.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.basedOn = None
         """ Fulfills plan, proposal, or order.
@@ -65,7 +62,8 @@ class RequestGroup(domainresource.DomainResource):
         List of `str` items. """
         
         self.intent = None
-        """ proposal | plan | order.
+        """ proposal | plan | directive | order | original-order | reflex-order
+        | filler-order | instance-order | option.
         Type `str`. """
         
         self.note = None
@@ -89,8 +87,8 @@ class RequestGroup(domainresource.DomainResource):
         List of `FHIRReference` items (represented as `dict` in JSON). """
         
         self.status = None
-        """ draft | active | suspended | cancelled | completed | entered-in-
-        error | unknown.
+        """ draft | active | on-hold | revoked | completed | entered-in-error |
+        unknown.
         Type `str`. """
         
         self.subject = None
@@ -104,7 +102,7 @@ class RequestGroup(domainresource.DomainResource):
         js.extend([
             ("action", "action", RequestGroupAction, True, None, False),
             ("author", "author", fhirreference.FHIRReference, False, None, False),
-            ("authoredOn", "authoredOn", fhirdate.FHIRDate, False, None, False),
+            ("authoredOn", "authoredOn", fhirdatetime.FHIRDateTime, False, None, False),
             ("basedOn", "basedOn", fhirreference.FHIRReference, True, None, False),
             ("code", "code", codeableconcept.CodeableConcept, False, None, False),
             ("encounter", "encounter", fhirreference.FHIRReference, False, None, False),
@@ -213,7 +211,7 @@ class RequestGroupAction(backboneelement.BackboneElement):
         
         self.timingDateTime = None
         """ When the action should take place.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.timingDuration = None
         """ When the action should take place.
@@ -261,7 +259,7 @@ class RequestGroupAction(backboneelement.BackboneElement):
             ("selectionBehavior", "selectionBehavior", str, False, None, False),
             ("textEquivalent", "textEquivalent", str, False, None, False),
             ("timingAge", "timingAge", age.Age, False, "timing", False),
-            ("timingDateTime", "timingDateTime", fhirdate.FHIRDate, False, "timing", False),
+            ("timingDateTime", "timingDateTime", fhirdatetime.FHIRDateTime, False, "timing", False),
             ("timingDuration", "timingDuration", duration.Duration, False, "timing", False),
             ("timingPeriod", "timingPeriod", period.Period, False, "timing", False),
             ("timingRange", "timingRange", range.Range, False, "timing", False),
@@ -355,52 +353,15 @@ class RequestGroupActionRelatedAction(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import age
-except ImportError:
-    age = sys.modules[__package__ + '.age']
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import expression
-except ImportError:
-    expression = sys.modules[__package__ + '.expression']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import range
-except ImportError:
-    range = sys.modules[__package__ + '.range']
-try:
-    from . import relatedartifact
-except ImportError:
-    relatedartifact = sys.modules[__package__ + '.relatedartifact']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
+from . import age
+from . import annotation
+from . import codeableconcept
+from . import duration
+from . import expression
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import range
+from . import relatedartifact
+from . import timing

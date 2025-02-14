@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/EvidenceVariable) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/EvidenceVariable).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -46,7 +43,7 @@ class EvidenceVariable(domainresource.DomainResource):
         
         self.date = None
         """ Date last changed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.description = None
         """ Natural language description of the evidence variable.
@@ -144,7 +141,7 @@ class EvidenceVariable(domainresource.DomainResource):
             ("characteristic", "characteristic", EvidenceVariableCharacteristic, True, None, True),
             ("contact", "contact", contactdetail.ContactDetail, True, None, False),
             ("copyright", "copyright", str, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("description", "description", str, False, None, False),
             ("editor", "editor", contactdetail.ContactDetail, True, None, False),
             ("effectivePeriod", "effectivePeriod", period.Period, False, None, False),
@@ -228,7 +225,7 @@ class EvidenceVariableCharacteristic(backboneelement.BackboneElement):
         
         self.participantEffectiveDateTime = None
         """ What time period do participants cover.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.participantEffectiveDuration = None
         """ What time period do participants cover.
@@ -264,7 +261,7 @@ class EvidenceVariableCharacteristic(backboneelement.BackboneElement):
             ("description", "description", str, False, None, False),
             ("exclude", "exclude", bool, False, None, False),
             ("groupMeasure", "groupMeasure", str, False, None, False),
-            ("participantEffectiveDateTime", "participantEffectiveDateTime", fhirdate.FHIRDate, False, "participantEffective", False),
+            ("participantEffectiveDateTime", "participantEffectiveDateTime", fhirdatetime.FHIRDateTime, False, "participantEffective", False),
             ("participantEffectiveDuration", "participantEffectiveDuration", duration.Duration, False, "participantEffective", False),
             ("participantEffectivePeriod", "participantEffectivePeriod", period.Period, False, "participantEffective", False),
             ("participantEffectiveTiming", "participantEffectiveTiming", timing.Timing, False, "participantEffective", False),
@@ -274,60 +271,18 @@ class EvidenceVariableCharacteristic(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import contactdetail
-except ImportError:
-    contactdetail = sys.modules[__package__ + '.contactdetail']
-try:
-    from . import datarequirement
-except ImportError:
-    datarequirement = sys.modules[__package__ + '.datarequirement']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import expression
-except ImportError:
-    expression = sys.modules[__package__ + '.expression']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import relatedartifact
-except ImportError:
-    relatedartifact = sys.modules[__package__ + '.relatedartifact']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
-try:
-    from . import triggerdefinition
-except ImportError:
-    triggerdefinition = sys.modules[__package__ + '.triggerdefinition']
-try:
-    from . import usagecontext
-except ImportError:
-    usagecontext = sys.modules[__package__ + '.usagecontext']
+from . import annotation
+from . import codeableconcept
+from . import contactdetail
+from . import datarequirement
+from . import duration
+from . import expression
+from . import fhirdate
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import relatedartifact
+from . import timing
+from . import triggerdefinition
+from . import usagecontext

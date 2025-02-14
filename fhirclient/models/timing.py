@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Timing) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Timing).
+# 2024, SMART Health IT.
 
 
 from . import backboneelement
@@ -33,7 +30,7 @@ class Timing(backboneelement.BackboneElement):
         
         self.event = None
         """ When the event occurs.
-        List of `FHIRDate` items (represented as `str` in JSON). """
+        List of `FHIRDateTime` items (represented as `str` in JSON). """
         
         self.repeat = None
         """ When the event is to occur.
@@ -45,7 +42,7 @@ class Timing(backboneelement.BackboneElement):
         js = super(Timing, self).elementProperties()
         js.extend([
             ("code", "code", codeableconcept.CodeableConcept, False, None, False),
-            ("event", "event", fhirdate.FHIRDate, True, None, False),
+            ("event", "event", fhirdatetime.FHIRDateTime, True, None, False),
             ("repeat", "repeat", TimingRepeat, False, None, False),
         ])
         return js
@@ -131,7 +128,7 @@ class TimingRepeat(element.Element):
         
         self.timeOfDay = None
         """ Time of day for action.
-        List of `FHIRDate` items (represented as `str` in JSON). """
+        List of `FHIRTime` items (represented as `str` in JSON). """
         
         self.when = None
         """ Code for time period of occurrence.
@@ -157,30 +154,15 @@ class TimingRepeat(element.Element):
             ("period", "period", float, False, None, False),
             ("periodMax", "periodMax", float, False, None, False),
             ("periodUnit", "periodUnit", str, False, None, False),
-            ("timeOfDay", "timeOfDay", fhirdate.FHIRDate, True, None, False),
+            ("timeOfDay", "timeOfDay", fhirtime.FHIRTime, True, None, False),
             ("when", "when", str, True, None, False),
         ])
         return js
 
 
-import sys
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import range
-except ImportError:
-    range = sys.modules[__package__ + '.range']
+from . import codeableconcept
+from . import duration
+from . import fhirdatetime
+from . import fhirtime
+from . import period
+from . import range

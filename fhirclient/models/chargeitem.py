@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/ChargeItem) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/ChargeItem).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -59,7 +56,7 @@ class ChargeItem(domainresource.DomainResource):
         
         self.enteredDate = None
         """ Date the charge item was entered.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.enterer = None
         """ Individual who was entering.
@@ -79,7 +76,7 @@ class ChargeItem(domainresource.DomainResource):
         
         self.occurrenceDateTime = None
         """ When the charged service was applied.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.occurrencePeriod = None
         """ When the charged service was applied.
@@ -158,12 +155,12 @@ class ChargeItem(domainresource.DomainResource):
             ("costCenter", "costCenter", fhirreference.FHIRReference, False, None, False),
             ("definitionCanonical", "definitionCanonical", str, True, None, False),
             ("definitionUri", "definitionUri", str, True, None, False),
-            ("enteredDate", "enteredDate", fhirdate.FHIRDate, False, None, False),
+            ("enteredDate", "enteredDate", fhirdatetime.FHIRDateTime, False, None, False),
             ("enterer", "enterer", fhirreference.FHIRReference, False, None, False),
             ("factorOverride", "factorOverride", float, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("note", "note", annotation.Annotation, True, None, False),
-            ("occurrenceDateTime", "occurrenceDateTime", fhirdate.FHIRDate, False, "occurrence", False),
+            ("occurrenceDateTime", "occurrenceDateTime", fhirdatetime.FHIRDateTime, False, "occurrence", False),
             ("occurrencePeriod", "occurrencePeriod", period.Period, False, "occurrence", False),
             ("occurrenceTiming", "occurrenceTiming", timing.Timing, False, "occurrence", False),
             ("overrideReason", "overrideReason", str, False, None, False),
@@ -221,40 +218,12 @@ class ChargeItemPerformer(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import money
-except ImportError:
-    money = sys.modules[__package__ + '.money']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import quantity
-except ImportError:
-    quantity = sys.modules[__package__ + '.quantity']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
+from . import annotation
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import money
+from . import period
+from . import quantity
+from . import timing

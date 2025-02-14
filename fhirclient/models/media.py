@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/Media) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/Media).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -36,7 +33,7 @@ class Media(domainresource.DomainResource):
         
         self.createdDateTime = None
         """ When Media was collected.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.createdPeriod = None
         """ When Media was collected.
@@ -72,7 +69,7 @@ class Media(domainresource.DomainResource):
         
         self.issued = None
         """ Date/Time this version was made available.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRInstant` (represented as `str` in JSON). """
         
         self.modality = None
         """ The type of acquisition equipment/process.
@@ -95,7 +92,7 @@ class Media(domainresource.DomainResource):
         List of `CodeableConcept` items (represented as `dict` in JSON). """
         
         self.status = None
-        """ preparation | in-progress | not-done | suspended | aborted |
+        """ preparation | in-progress | not-done | on-hold | stopped |
         completed | entered-in-error | unknown.
         Type `str`. """
         
@@ -123,7 +120,7 @@ class Media(domainresource.DomainResource):
             ("basedOn", "basedOn", fhirreference.FHIRReference, True, None, False),
             ("bodySite", "bodySite", codeableconcept.CodeableConcept, False, None, False),
             ("content", "content", attachment.Attachment, False, None, True),
-            ("createdDateTime", "createdDateTime", fhirdate.FHIRDate, False, "created", False),
+            ("createdDateTime", "createdDateTime", fhirdatetime.FHIRDateTime, False, "created", False),
             ("createdPeriod", "createdPeriod", period.Period, False, "created", False),
             ("device", "device", fhirreference.FHIRReference, False, None, False),
             ("deviceName", "deviceName", str, False, None, False),
@@ -132,7 +129,7 @@ class Media(domainresource.DomainResource):
             ("frames", "frames", int, False, None, False),
             ("height", "height", int, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
-            ("issued", "issued", fhirdate.FHIRDate, False, None, False),
+            ("issued", "issued", fhirinstant.FHIRInstant, False, None, False),
             ("modality", "modality", codeableconcept.CodeableConcept, False, None, False),
             ("note", "note", annotation.Annotation, True, None, False),
             ("operator", "operator", fhirreference.FHIRReference, False, None, False),
@@ -147,32 +144,11 @@ class Media(domainresource.DomainResource):
         return js
 
 
-import sys
-try:
-    from . import annotation
-except ImportError:
-    annotation = sys.modules[__package__ + '.annotation']
-try:
-    from . import attachment
-except ImportError:
-    attachment = sys.modules[__package__ + '.attachment']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
+from . import annotation
+from . import attachment
+from . import codeableconcept
+from . import fhirdatetime
+from . import fhirinstant
+from . import fhirreference
+from . import identifier
+from . import period

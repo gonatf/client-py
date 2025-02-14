@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/ActivityDefinition) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/ActivityDefinition).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -52,7 +49,7 @@ class ActivityDefinition(domainresource.DomainResource):
         
         self.date = None
         """ Date last changed.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.description = None
         """ Natural language description of the activity definition.
@@ -91,7 +88,8 @@ class ActivityDefinition(domainresource.DomainResource):
         List of `Identifier` items (represented as `dict` in JSON). """
         
         self.intent = None
-        """ proposal | plan | order.
+        """ proposal | plan | directive | order | original-order | reflex-order
+        | filler-order | instance-order | option.
         Type `str`. """
         
         self.jurisdiction = None
@@ -192,7 +190,7 @@ class ActivityDefinition(domainresource.DomainResource):
         
         self.timingDateTime = None
         """ When activity is to occur.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.timingDuration = None
         """ When activity is to occur.
@@ -250,7 +248,7 @@ class ActivityDefinition(domainresource.DomainResource):
             ("code", "code", codeableconcept.CodeableConcept, False, None, False),
             ("contact", "contact", contactdetail.ContactDetail, True, None, False),
             ("copyright", "copyright", str, False, None, False),
-            ("date", "date", fhirdate.FHIRDate, False, None, False),
+            ("date", "date", fhirdatetime.FHIRDateTime, False, None, False),
             ("description", "description", str, False, None, False),
             ("doNotPerform", "doNotPerform", bool, False, None, False),
             ("dosage", "dosage", dosage.Dosage, True, None, False),
@@ -285,7 +283,7 @@ class ActivityDefinition(domainresource.DomainResource):
             ("subjectReference", "subjectReference", fhirreference.FHIRReference, False, "subject", False),
             ("subtitle", "subtitle", str, False, None, False),
             ("timingAge", "timingAge", age.Age, False, "timing", False),
-            ("timingDateTime", "timingDateTime", fhirdate.FHIRDate, False, "timing", False),
+            ("timingDateTime", "timingDateTime", fhirdatetime.FHIRDateTime, False, "timing", False),
             ("timingDuration", "timingDuration", duration.Duration, False, "timing", False),
             ("timingPeriod", "timingPeriod", period.Period, False, "timing", False),
             ("timingRange", "timingRange", range.Range, False, "timing", False),
@@ -377,64 +375,19 @@ class ActivityDefinitionParticipant(backboneelement.BackboneElement):
         return js
 
 
-import sys
-try:
-    from . import age
-except ImportError:
-    age = sys.modules[__package__ + '.age']
-try:
-    from . import codeableconcept
-except ImportError:
-    codeableconcept = sys.modules[__package__ + '.codeableconcept']
-try:
-    from . import contactdetail
-except ImportError:
-    contactdetail = sys.modules[__package__ + '.contactdetail']
-try:
-    from . import dosage
-except ImportError:
-    dosage = sys.modules[__package__ + '.dosage']
-try:
-    from . import duration
-except ImportError:
-    duration = sys.modules[__package__ + '.duration']
-try:
-    from . import expression
-except ImportError:
-    expression = sys.modules[__package__ + '.expression']
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
-try:
-    from . import period
-except ImportError:
-    period = sys.modules[__package__ + '.period']
-try:
-    from . import quantity
-except ImportError:
-    quantity = sys.modules[__package__ + '.quantity']
-try:
-    from . import range
-except ImportError:
-    range = sys.modules[__package__ + '.range']
-try:
-    from . import relatedartifact
-except ImportError:
-    relatedartifact = sys.modules[__package__ + '.relatedartifact']
-try:
-    from . import timing
-except ImportError:
-    timing = sys.modules[__package__ + '.timing']
-try:
-    from . import usagecontext
-except ImportError:
-    usagecontext = sys.modules[__package__ + '.usagecontext']
+from . import age
+from . import codeableconcept
+from . import contactdetail
+from . import dosage
+from . import duration
+from . import expression
+from . import fhirdate
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
+from . import period
+from . import quantity
+from . import range
+from . import relatedartifact
+from . import timing
+from . import usagecontext

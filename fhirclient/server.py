@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
 import json
 import requests
-import urllib
 import logging
 import urllib.parse as urlparse
 
-from auth import FHIRAuth
+from .auth import FHIRAuth
 
 FHIRJSONMimeType = 'application/fhir+json'
 
@@ -77,7 +74,8 @@ class FHIRServer(object):
         """
         if self._capability is None or force:
             logger.info('Fetching CapabilityStatement from {0}'.format(self.base_uri))
-            from models import capabilitystatement
+            from .models import capabilitystatement
+
             if auth:
                 path=f"metadata?Authorization=Bearer {auth}"
 

@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  Generated from FHIR 4.0.0-a53ec6ee1b (http://hl7.org/fhir/StructureDefinition/EnrollmentResponse) on 2019-05-07.
-#  2019, SMART Health IT.
+# Generated from FHIR 4.0.1-9346c8cc45 (http://hl7.org/fhir/StructureDefinition/EnrollmentResponse).
+# 2024, SMART Health IT.
 
 
 from . import domainresource
@@ -26,7 +23,7 @@ class EnrollmentResponse(domainresource.DomainResource):
         
         self.created = None
         """ Creation date.
-        Type `FHIRDate` (represented as `str` in JSON). """
+        Type `FHIRDateTime` (represented as `str` in JSON). """
         
         self.disposition = None
         """ Disposition Message.
@@ -61,7 +58,7 @@ class EnrollmentResponse(domainresource.DomainResource):
     def elementProperties(self):
         js = super(EnrollmentResponse, self).elementProperties()
         js.extend([
-            ("created", "created", fhirdate.FHIRDate, False, None, False),
+            ("created", "created", fhirdatetime.FHIRDateTime, False, None, False),
             ("disposition", "disposition", str, False, None, False),
             ("identifier", "identifier", identifier.Identifier, True, None, False),
             ("organization", "organization", fhirreference.FHIRReference, False, None, False),
@@ -73,16 +70,6 @@ class EnrollmentResponse(domainresource.DomainResource):
         return js
 
 
-import sys
-try:
-    from . import fhirdate
-except ImportError:
-    fhirdate = sys.modules[__package__ + '.fhirdate']
-try:
-    from . import fhirreference
-except ImportError:
-    fhirreference = sys.modules[__package__ + '.fhirreference']
-try:
-    from . import identifier
-except ImportError:
-    identifier = sys.modules[__package__ + '.identifier']
+from . import fhirdatetime
+from . import fhirreference
+from . import identifier
