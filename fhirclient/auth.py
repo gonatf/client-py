@@ -84,6 +84,7 @@ class FHIRAuth:
             ):
                 auth_type = "oauth2"
 
+
         return cls.create(auth_type, state=state)
 
     @classmethod

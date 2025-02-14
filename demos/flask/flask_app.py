@@ -38,8 +38,16 @@ def _reset():
         del session['state']
 
 def _get_prescriptions(smart):
+<<<<<<< HEAD
     search = MedicationRequest.where({'patient': smart.patient_id})
     return list(search.perform_resources_iter(smart.server))
+=======
+    bundle = MedicationRequest.where({'patient': smart.patient_id}).perform(smart.server)
+    pres = [be.resource for be in bundle.entry] if bundle is not None and bundle.entry is not None else None
+    if pres is not None and len(pres) > 0:
+        return pres
+    return None
+>>>>>>> 40328478 (update to 4.2)
 
 def _get_medication_by_ref(ref, smart):
     med_id = ref.split("/")[1]
@@ -85,7 +93,11 @@ def index():
         # generate simple body text
         body += "<p>You are authorized and ready to make API requests for <em>{0}</em>.</p>".format(name)
         pres = _get_prescriptions(smart)
+<<<<<<< HEAD
         if pres:
+=======
+        if pres is not None:
+>>>>>>> 40328478 (update to 4.2)
             body += "<p>{0} prescriptions: <ul><li>{1}</li></ul></p>".format("His" if 'male' == smart.patient.gender else "Her", '</li><li>'.join([_get_med_name(p,smart) for p in pres]))
         else:
             body += "<p>(There are no prescriptions for {0})</p>".format("him" if 'male' == smart.patient.gender else "her")
