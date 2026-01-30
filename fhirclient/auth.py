@@ -1,5 +1,8 @@
+import base64
+import hashlib
 import uuid
 import logging
+import secrets
 from datetime import datetime, timedelta
 import urllib.parse as urlparse
 from urllib.parse import urlencode
@@ -141,7 +144,8 @@ class FHIROAuth2Auth(FHIRAuth):
         self.refresh_token = None
         self.expires_at = None
         self.jwt_token = None
-        
+        self.code_verifier = None
+
         super(FHIROAuth2Auth, self).__init__(state=state)
     
     @property
@@ -154,8 +158,8 @@ class FHIROAuth2Auth(FHIRAuth):
         super(FHIROAuth2Auth, self).reset()
         self.access_token = None
         self.auth_state = None
-    
-    
+        self.code_verifier = None
+
     # MARK: Signing/Authorizing Request Headers
     
     def can_sign_headers(self):
@@ -214,6 +218,18 @@ class FHIROAuth2Auth(FHIRAuth):
         }
         if server.launch_token is not None:
             params['launch'] = server.launch_token
+        # PKCE parameters
+        # server is free to ignore PKCE,
+        # so it should never be wrong to include it
+        if self.code_verifier is None:
+            self.code_verifier = secrets.token_urlsafe(64)
+            server.should_save_state()
+        verifier_hash = hashlib.sha256(self.code_verifier.encode()).digest()
+        params["code_challenge"] = (
+            base64.urlsafe_b64encode(verifier_hash).decode().rstrip("=")
+        )
+        params["code_challenge_method"] = "S256"
+
         return params
     
     def handle_callback(self, url, server):
@@ -259,6 +275,7 @@ class FHIROAuth2Auth(FHIRAuth):
             'grant_type': 'authorization_code',
             'redirect_uri': self._redirect_uri,
             'state': self.auth_state,
+            'code_verifier': self.code_verifier,
         }
     
     def _request_access_token(self, server, params):
@@ -374,7 +391,9 @@ class FHIROAuth2Auth(FHIRAuth):
             s['access_token'] = self.access_token
         if self.refresh_token is not None:
             s['refresh_token'] = self.refresh_token
-        
+        if self.code_verifier is not None:
+            s['code_verifier'] = self.code_verifier
+
         return s
     
     def from_state(self, state):
@@ -392,6 +411,7 @@ class FHIROAuth2Auth(FHIRAuth):
         self.access_token = state.get('access_token') or self.access_token
         self.refresh_token = state.get('refresh_token') or self.refresh_token
         self.jwt_token = state.get('jwt_token') or self.jwt_token
+        self.code_verifier = state.get("code_verifier") or self.code_verifier
 
     # MARK: Utilities    
     
