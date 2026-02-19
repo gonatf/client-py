@@ -35,3 +35,11 @@ If you have any question or concerns, feel free to reach out to us at
 [squash]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 [AUTHORS.md]: https://github.com/smart-on-fhir/client-py/blob/main/AUTHORS.md
 [procedures]: http://twistedmatrix.com/trac/wiki/CompatibilityPolicy
+
+# Restrictions on generative AI usage
+
+At this time we are not accepting code contributions from generative AI due to
+potential licensing issues and the increased burden of review on maintainers.
+
+We also ask that generative AI not be used to write content in issues/PRs, and reserve
+the right to close issues without response in cases where it has been obviously applied.
