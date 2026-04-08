@@ -4,7 +4,7 @@
 import datetime
 import re
 from typing import Any, Union
-
+import dateutil.parser
 
 class FHIRDate:
     """
@@ -117,7 +117,8 @@ class FHIRDate:
                 return cls(int(pieces[0]), 1, 1)
             else:
                 return cls(int(pieces[0]), int(pieces[1]), 1)
-        return cls.fromisoformat(value)
+        return dateutil.parser.isoparse(value)
+        # return cls.fromisoformat(value)
 
     @staticmethod
     def _parse_date(value: str) -> datetime.date:
@@ -133,7 +134,8 @@ class FHIRDate:
     @staticmethod
     def _parse_time(value: str) -> datetime.time:
         value = FHIRDate._strip_leap_seconds(value)
-        return datetime.time.fromisoformat(value)
+        return dateutil.parser.isoparse(value)
+        # return datetime.time.fromisoformat(value)
 
     @staticmethod
     def _strip_leap_seconds(value: str) -> str:
